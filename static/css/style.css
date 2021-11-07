@@ -23,8 +23,8 @@
 }
 
 .draw-field {
-	width: 300px;
-	height: 300px;
+	width: 252px;
+	height: 252px;
 	border: 1px solid burlywood;
 	border-radius: 5px;
 	display: block;
