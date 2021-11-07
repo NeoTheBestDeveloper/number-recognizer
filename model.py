@@ -15,6 +15,7 @@ def preprocess_image(img):
 
 def predict_num(num_img):
     img = preprocess_image(num_img)
+    np.save('img_example', img)
     model_output = model.predict(np.expand_dims(img, axis=0))
     predicted_num = np.argmax(model_output)
     return predicted_num

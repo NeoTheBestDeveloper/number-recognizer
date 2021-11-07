@@ -2,7 +2,7 @@ const canvas = document.querySelector(".draw-field");
 let alert_div = document.querySelector(".alert");
 const ctx = canvas.getContext("2d");
 let isMouseDown = false;
-ctx.lineWidth = 10;
+ctx.lineWidth = 14;
 
 canvas.addEventListener("mousedown", () => {
 	isMouseDown = true;
@@ -22,7 +22,7 @@ canvas.onmousemove = (e) => {
 		ctx.stroke();
 
 		ctx.beginPath();
-		ctx.arc(x, y, 5, 0, Math.PI * 2);
+		ctx.arc(x, y, 7, 0, Math.PI * 2);
 		ctx.fill();
 
 		ctx.beginPath();
