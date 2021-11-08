@@ -13,11 +13,8 @@ def index():
 def predict():
     if request.method == 'POST':
         img = request.files["img"]
-        num = predict_num(img)
-
-        return {
-            "num": str(num)
-        }
+        num = str(predict_num(img))
+        return dict(num=num)
 
 
 if __name__ == "__main__":

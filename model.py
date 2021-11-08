@@ -7,6 +7,7 @@ model = load_model("model")
 
 
 def preprocess_image(img):
+    """Resize img to 28x28 and normalize for model input."""
     img = Image.open(img)
     img = img.resize((28, 28))
     np_img = np.asarray(img)[:, :, 3]
@@ -14,6 +15,7 @@ def preprocess_image(img):
 
 
 def predict_num(num_img):
+    """Predicting a number from img."""
     img = preprocess_image(num_img)
     np.save('img_example', img)
     model_output = model.predict(np.expand_dims(img, axis=0))

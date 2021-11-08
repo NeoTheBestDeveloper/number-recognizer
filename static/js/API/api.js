@@ -1,4 +1,5 @@
 const predictAPI = async (numImage) => {
+	// Send img file to api and getting preicted number.
 	const formData = new FormData();
 	formData.append("img", numImage);
 	const response = await fetch("/predict", {
@@ -9,6 +10,6 @@ const predictAPI = async (numImage) => {
 		const predict_num = await response.json();
 		return predict_num;
 	} else {
-		showAlert("Ошибка" + response.status, "error");
+		showAlert("Ошибка " + response.status);
 	}
 };
