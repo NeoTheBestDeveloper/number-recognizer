@@ -49,6 +49,9 @@ const showAlert = (message, type) => {
 
 const predict = () => {
 	canvas.toBlob(async (blob) => {
+		// Clear canvas field.
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
 		// Convert canvas img to file.
 		const response = await predictAPI(blob);
 		showAlert(response.num, "message");
