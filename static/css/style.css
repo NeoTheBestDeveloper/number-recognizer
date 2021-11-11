@@ -4,12 +4,17 @@
 }
 
 .container {
-	width: 100%;
-	max-width: 1100px;
-	margin: 0 auto;
+	justify-content: center;
+	display: flex;
 }
 
 .predict {
+	display: block;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+.send-image {
 	display: block;
 	margin: 0 auto;
 	margin-top: 20px;
@@ -30,4 +35,76 @@
 	display: block;
 	margin: 0 auto;
 	margin-top: 40px;
+}
+
+.data-collecting {
+	display: flex;
+	flex-direction: column;
+	margin-top: 40px;
+	margin-right: 30px;
+}
+
+.data-collection_content {
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+	max-width: 170px;
+}
+
+.data-collection_content label {
+	margin-bottom: 10px;
+}
+
+.num-input {
+	margin-bottom: 20px;
+}
+
+.data-collecting_title {
+	margin-bottom: 20px;
+}
+
+.switch-btn-content {
+	display: flex;
+	align-items: center;
+}
+
+.switch-button_state {
+	margin-left: 20px;
+}
+
+.switch-btn {
+	display: inline-block;
+	width: 36px; /* ширина */
+	height: 19px; /* высота */
+	border-radius: 19px; /* радиус скругления */
+	background: #bfbfbf; /* цвет фона */
+	z-index: 0;
+	margin: 0;
+	padding: 0;
+	border: none;
+	cursor: pointer;
+	position: relative;
+	transition-duration: 300ms; /* анимация */
+}
+.switch-btn::after {
+	content: "";
+	height: 16px; /* высота кнопки */
+	width: 16px; /* ширина кнопки */
+	border-radius: 17px;
+	background: #fff; /* цвет кнопки */
+	top: 1.5px; /* положение кнопки по вертикали относительно основы */
+	left: 1.5px; /* положение кнопки по горизонтали относительно основы */
+	transition-duration: 300ms; /* анимация */
+	position: absolute;
+	z-index: 1;
+}
+.switch-on {
+	background: #118c4e;
+}
+.switch-on::after {
+	left: 18px;
+}
+
+.hide {
+	display: none;
 }

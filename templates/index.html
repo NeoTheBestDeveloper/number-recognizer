@@ -14,11 +14,52 @@
 	</head>
 	<body>
 		<div class="container">
-			<canvas class="draw-field" width="252px" height="252px"></canvas>
-			<button class="predict" onclick="predict(event)">
-				Распознать цифру
-			</button>
-			<div id="alert"></div>
+			<div class="data-collecting">
+				<div class="data-collecting_title">Режим сбора данных</div>
+				<div class="switch-btn-content">
+					<div
+						class="switch-btn"
+						onclick="toggleDataCollectMode(event)"
+					></div>
+					<div class="switch-button_state">Выключен</div>
+				</div>
+
+				<div class="data-collection_content hide">
+					<label for="num">Число</label>
+					<input
+						type="text"
+						name="number"
+						id="num"
+						class="num-input"
+					/>
+					<label for="line-width">Ширина линии</label>
+					<input
+						type="range"
+						min="10"
+						max="20"
+						step="1"
+						name="line-width"
+						id="line-width"
+						value="15"
+						oninput="changeLineWidth(this)"
+					/>
+					<div class="line-width_state">15</div>
+				</div>
+			</div>
+			<div class="draw-field-wrapper">
+				<canvas
+					class="draw-field"
+					width="252px"
+					height="252px"
+				></canvas>
+				<button class="predict" onclick="predict(event)">
+					Распознать цифру
+				</button>
+				<button class="send-image hide" onclick="sendImage(event)">
+					Отправить изображение
+				</button>
+				<div id="alert"></div>
+			</div>
 		</div>
 		<script src="{{url_for('static', filename='js/script.js')}}"></script>
 	</body>
