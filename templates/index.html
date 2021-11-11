@@ -55,12 +55,13 @@
 				<button class="predict" onclick="predict(event)">
 					Распознать цифру
 				</button>
-				<button class="send-image hide" onclick="sendImage(event)">
+				<button class="save-image hide" onclick="saveImage(event)">
 					Отправить изображение
 				</button>
 				<div id="alert"></div>
 			</div>
 		</div>
+		<div id="log"></div>
 		<script src="{{url_for('static', filename='js/script.js')}}"></script>
 	</body>
 </html>

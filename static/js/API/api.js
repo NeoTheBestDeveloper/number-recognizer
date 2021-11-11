@@ -13,3 +13,15 @@ const predictAPI = async (numImage) => {
 		showAlert("Ошибка " + response.status);
 	}
 };
+
+const saveImageAPI = async (numImage, lineWidth, rightNumber) => {
+	// Send img file and other metadata for saving it on server.
+	const formData = new FormData();
+	formData.append("img", numImage);
+	formData.append("line_width", lineWidth);
+	formData.append("right_number", rightNumber);
+	const response = await fetch("/save-image", {
+		method: "POST",
+		body: formData,
+	});
+};

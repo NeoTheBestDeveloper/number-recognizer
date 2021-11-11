@@ -1,16 +1,17 @@
 from flask import Flask, render_template, request
-from sqlalchemy import Column, Integer, BLOB
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 
-from model import predict_num
+from model import predict_num, save_img_file
 
 app = Flask(__name__)
 
 Base = declarative_base()
-engine = create_engine('postgresql+psycopg2://neo:1234@mnist_problem-db-1:5432/imagesdb')
+engine = create_engine('postgresql+psycopg2://neo:1234@mnist_problem-db-1:5432/imagesdb', echo=True)
 Base.metadata.create_all(engine)
-IMAGES_ID = 0
+Session = sessionmaker(bind=engine)
 
 
 class Images(Base):
@@ -18,8 +19,8 @@ class Images(Base):
 
     id = Column(Integer, primary_key=True)
     line_width = Column(Integer)
-    number = Column(Integer)
-    number_image = Column(BLOB)
+    num = Column(Integer)
+    num_image = Column(String)
 
 
 images = Images()
@@ -38,12 +39,24 @@ def predict():
         return dict(num=num)
 
 
-@app.route("/save-img", methods=['POST'])
-def save_img():
+@app.route("/save-image", methods=['POST'])
+def save_image():
     if request.method == 'POST':
-        ins = images.id
-        print(ins)
-        return {}
+        data = request.form
+        line_width = data["line_width"]
+        right_number = data["right_number"]
+        image = request.files["img"]
+        image_path = save_img_file(image)
+
+        i = Images(line_width=line_width, num=right_number, num_image=image_path)
+        session = Session()
+        session.add(i)
+        session.commit()
+        session.close()
+
+        return {
+            "payload": "ok"
+        }
 
 
 if __name__ == "__main__":
