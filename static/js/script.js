@@ -108,7 +108,6 @@ const saveImage = () => {
 
 			// Convert canvas img to file.
 			const response = await saveImageAPI(blob, LINE_WIDTH, rightNumber);
-			console.log(response);
 		}, "image/png");
 	} else {
 		showAlert("Пустое поле с числом", "error");

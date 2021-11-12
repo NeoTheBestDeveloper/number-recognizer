@@ -24,4 +24,8 @@ const saveImageAPI = async (numImage, lineWidth, rightNumber) => {
 		method: "POST",
 		body: formData,
 	});
+
+	if (!response.ok) {
+		showAlert("Ошибка сохранения фото " + response.status);
+	}
 };

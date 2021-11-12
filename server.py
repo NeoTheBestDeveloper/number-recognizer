@@ -1,29 +1,15 @@
 from flask import Flask, render_template, request
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine
-
-from model import predict_num, save_img_file
+from database.images.image import *
+from database.base import Session, engine, Base
+from model import predict_num
 
 app = Flask(__name__)
 
-Base = declarative_base()
-engine = create_engine('postgresql+psycopg2://neo:1234@mnist_problem-db-1:5432/imagesdb', echo=True)
+# Generate database schema
 Base.metadata.create_all(engine)
-Session = sessionmaker(bind=engine)
 
-
-class Images(Base):
-    __tablename__ = 'images'
-
-    id = Column(Integer, primary_key=True)
-    line_width = Column(Integer)
-    num = Column(Integer)
-    num_image = Column(String)
-
-
-images = Images()
+# Create a new session
+session = Session()
 
 
 @app.route("/")
@@ -42,17 +28,15 @@ def predict():
 @app.route("/save-image", methods=['POST'])
 def save_image():
     if request.method == 'POST':
+        # Get data from request
         data = request.form
-        line_width = data["line_width"]
-        right_number = data["right_number"]
+        line_width = int(data["line_width"])
+        right_number = int(data["right_number"])
         image = request.files["img"]
-        image_path = save_img_file(image)
 
-        i = Images(line_width=line_width, num=right_number, num_image=image_path)
-        session = Session()
-        session.add(i)
-        session.commit()
-        session.close()
+        # Create image service instance and saving image with same metadata
+        image_service = ImageService()
+        image_service.insert_image(image, line_width, right_number)
 
         return {
             "payload": "ok"
