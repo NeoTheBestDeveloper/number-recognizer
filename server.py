@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 from database.images.image import *
 from database.base import Session, engine, Base
 from model import predict_num
@@ -41,6 +41,13 @@ def save_image():
         return {
             "payload": "ok"
         }
+
+
+@app.route("/get-images", methods=['GET'])
+def get_images():
+    dataset_path = ImageRepository.get_images()
+
+    return send_file(dataset_path, "dataset.npz")
 
 
 if __name__ == "__main__":
