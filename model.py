@@ -2,7 +2,7 @@ from tensorflow.keras.models import load_model
 import numpy as np
 from PIL import Image
 
-model = load_model("model")
+model = load_model("CNN_model")
 
 
 def preprocess_image(img):
