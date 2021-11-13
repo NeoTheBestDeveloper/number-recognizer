@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, send_file
-from database.images.image import *
+from database.image.image import *
 from database.base import Session, engine, Base
 from model import predict_num
 
