@@ -102,9 +102,7 @@ const saveImage = () => {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 			// Getting a right number.
-			const rightNumber_div = document.querySelector(".num-input");
-			const rightNumber = rightNumber_div.value;
-			rightNumber_div.value = "";
+			const rightNumber = document.querySelector(".num-input").value;
 
 			// Convert canvas img to file.
 			const response = await saveImageAPI(blob, LINE_WIDTH, rightNumber);
